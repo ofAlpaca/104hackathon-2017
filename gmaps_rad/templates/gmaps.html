@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<title>You can't see me之成本報吼哩災</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<link href='http://fonts.googleapis.com/css?family=Arimo:400,700' rel='stylesheet' type='text/css'>
+		{% load staticfiles %}
+		<link rel='stylesheet' href = "{% static 'css/skel-noscript.css'%}" type = 'text/css'>
+		<link rel='stylesheet' href = "{% static 'css/style.css'%}" type = 'text/css'>
+		<link rel='stylesheet' href = "{% static 'css/style-desktop.css'%}" type = 'text/css'>
+	<script>
+		 function choice(my_form)
+		 {
+			 
+			 str = ""
+			 
+			 for( var i = 0; i < {{num}}; i++ ){
+				if ( document.getElementById("check"+i).checked ){
+					str += document.getElementById("check"+i).value
+					str += ','
+				}
+			}
+			
+			document.getElementById("selected").value = str;
+			my_form.submit();
+		 }
+
+		 function toggle(source) {
+  			checkboxes = document.getElementsByName('bar');
+  			for(var i=0, n=checkboxes.length;i<n;i++) {
+    			checkboxes[i].checked = source.checked;
+  			}
+		}
+
+	 </script>
+	</head>
+	<body class="no-sidebar">
+
+		<!-- Header -->
+		<div id="header">
+			<div class="container"> 
+				
+				<!-- Logo -->
+				<div id="logo">
+					<h1><a>You can't see me之成本報吼哩災</a></h1>
+					<span>幫我撐十秒</span>
+				</div>
+				
+				<!-- Nav -->
+				<nav id="nav">
+					<ul>
+						<li><a>輸入資料</a></li>
+						<li class="active"><a>選擇工作</a></li>
+						<li><a>結果</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+
+		<!-- Main -->
+		<div id="main">
+			<div class="container">
+				<div class="row"> 
+					<table id="id_list_table" class="TB_COLLAPSE">
+					<form method="POST" action="/show_final">
+						{% if list %}
+							<tr>
+								<td><INPUT TYPE="checkbox" value = "Select All" onclick = 'toggle(this)'/></td>
+								<td>職位名稱</td>
+								<td>地址</td>
+							</tr>
+							{% for item in list %}
+								<tr>
+									<td><INPUT name="bar" TYPE="checkbox"  id="check{{item.counter}}" value = "{{ item.name }}:{{ item.addr }}"/></td>
+									<td>{{ item.name }}</td>
+									<td>{{ item.addr }}</td>
+								</tr>
+						{% endfor %}
+						<INPUT class = 'button' TYPE="button" VALUE="Go"
+						onClick="choice(this.form )">
+						{% else %}
+						<p>Wrong input.</p>
+						{% endif %}
+						{% csrf_token %}
+							<input type = 'hidden' id = "selected" name = "selected"/>
+					</form>
+				</div>
+			</div>
+		</div>
+	</body>
+	<body ONDRAGSTART="window.event.returnValue=false" ONCONTEXTMENU="window.event.returnValue=false" onSelectStart="event.returnValue=false">
+</html>

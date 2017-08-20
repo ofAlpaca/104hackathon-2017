@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>   
+    </head>
+    <body>
+   
+    {% if datas %}
+        <table>
+			<tr><td>統一編號</td><td>公司名稱</td><td>上市 </td><td>500大 </td></tr> 
+        {% for data in datas %}
+            <tr><td>{{ data.number }}</td><td>{{ data.name }}</td><td>{{ data.onMarket }}</td><td>{{ data.five00 }}</td></tr> 
+        {% endfor %}
+        </table> 
+    {% else %}
+        <p>No datas.</p>
+		
+		<input type = 'button' value='next'/>
+    {% endif %}
+    </body>
+</html> 

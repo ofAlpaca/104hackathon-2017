@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>You can't see me之成本報吼哩災</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<link href='http://fonts.googleapis.com/css?family=Arimo:400,700' rel='stylesheet' type='text/css'>
+		{% load staticfiles %}
+		<link rel='stylesheet' href = "{% static 'css/skel-noscript.css'%}" type = 'text/css'>
+		<link rel='stylesheet' href = "{% static 'css/style.css'%}" type = 'text/css'>
+		<link rel='stylesheet' href = "{% static 'css/style-desktop.css'%}" type = 'text/css'>
+	</head>
+    <body  class="no-sidebar">
+		<!-- Header -->
+		<div id="header">
+			<div class="container"> 
+				
+				<!-- Logo -->
+				<div id="logo">
+					<h1><a>You can't see me之成本報吼哩災</a></h1>
+					<span>幫我撐十秒</span>
+				</div>
+				
+				<!-- Nav -->
+				<nav id="nav">
+					<ul>
+						<li><a>輸入資料</a></li>
+						<li><a>選擇工作</a></li>
+						<li class="active"><a>結果</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+		
+		<!-- Main -->
+		<div id="main">
+			<div class="container">
+				<div class="row"> 
+					<table id="id_list_table" class="TB_COLLAPSE">
+						{% csrf_token %}
+						<tr>
+							<td>職位名稱</td>
+							<td>地址</td>
+							<td>分數</td>
+						</tr>
+						{% if list %}
+							{% for item in list %}
+								<tr>
+									<td> {{ item.name }}</td>
+									<td>{{ item.addr }}</td>
+									<td>{{ item.num_of_points }}</td>
+								</tr>
+							{% endfor %}
+						{% else %}
+							<p>No Answers.</p>
+						{% endif %}
+					</table>
+				</div>
+			</div>
+		</div>
+    </body>
+</html>
